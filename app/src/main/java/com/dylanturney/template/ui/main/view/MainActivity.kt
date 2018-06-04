@@ -1,7 +1,10 @@
 package com.dylanturney.template.ui.main.view
 
+import android.app.SearchManager
+import android.content.Context
 import android.os.Bundle
 import android.view.Menu
+import android.widget.SearchView
 import com.dylanturney.buzzmove.R
 import com.dylanturney.template.ui.base.view.BaseActivity
 import com.dylanturney.template.ui.main.interactor.MainMVPInteractor
@@ -30,6 +33,12 @@ class MainActivity : BaseActivity(), MainMVPView {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater = menuInflater
         inflater.inflate(R.menu.search_menu, menu)
+
+        // Associate searchable configuration with the SearchView
+        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val searchView = menu.findItem(R.id.search).actionView as SearchView
+        searchView.setSearchableInfo(
+                searchManager.getSearchableInfo(componentName))
 
         return true
     }
