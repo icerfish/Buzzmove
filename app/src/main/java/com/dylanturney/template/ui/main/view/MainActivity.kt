@@ -1,12 +1,13 @@
 package com.dylanturney.template.ui.main.view
 
 import android.os.Bundle
-import com.dylanturney.template.R
+import android.view.Menu
+import com.dylanturney.buzzmove.R
 import com.dylanturney.template.ui.base.view.BaseActivity
 import com.dylanturney.template.ui.main.interactor.MainMVPInteractor
 import com.dylanturney.template.ui.main.presenter.MainMVPPresenter
-
 import javax.inject.Inject
+
 
 class MainActivity : BaseActivity(), MainMVPView {
 
@@ -24,5 +25,12 @@ class MainActivity : BaseActivity(), MainMVPView {
     override fun onDestroy() {
         presenter.onDetach()
         super.onDestroy()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.search_menu, menu)
+
+        return true
     }
 }

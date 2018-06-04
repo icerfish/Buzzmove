@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">Template</string>
+    <string name="app_name">Buzzmove</string>
+    <string name="search_title">Search place</string>
+    <string name="search_hint">Venue, Address, Bar…</string>
 </resources>

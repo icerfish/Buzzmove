@@ -1,6 +1,6 @@
 package com.dylanturney.template.data.network
 
-import com.dylanturney.template.BuildConfig
+import com.dylanturney.buzzmove.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
