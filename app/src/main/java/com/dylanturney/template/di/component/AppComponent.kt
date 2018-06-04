@@ -1,0 +1,29 @@
+package com.dylanturney.template.di.component
+
+import android.app.Application
+import com.dylanturney.template.BaseApp
+import com.dylanturney.template.data.network.NetworkModule
+import com.dylanturney.template.di.builder.ActivityBuilder
+import com.dylanturney.template.di.module.AppModule
+import dagger.BindsInstance
+import dagger.Component
+import dagger.android.AndroidInjectionModule
+import javax.inject.Singleton
+
+
+@Singleton
+@Component(modules = [(AndroidInjectionModule::class), (AppModule::class), (NetworkModule::class), (ActivityBuilder::class)])
+interface AppComponent {
+
+    @Component.Builder
+    interface Builder {
+
+        @BindsInstance
+        fun application(application: Application): Builder
+
+        fun build(): AppComponent
+    }
+
+    fun inject(app: BaseApp)
+
+}
