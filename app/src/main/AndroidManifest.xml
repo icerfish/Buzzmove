@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name="com.dylanturney.template.BaseApp"
+        android:name="com.dylanturney.buzzmove.BaseApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -13,7 +13,7 @@
         android:supportsRtl="false"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.dylanturney.template.ui.main.view.MainActivity"
+            android:name="com.dylanturney.buzzmove.ui.main.view.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,16 +21,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
-            <meta-data android:name="android.app.searchable"
+            <meta-data
+                android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
 
         <activity
-            android:name="com.dylanturney.template.ui.main.view.SearchActivity"
+            android:name="com.dylanturney.buzzmove.ui.main.view.SearchActivity"
             android:screenOrientation="portrait">
-
-            <meta-data android:name="android.app.searchable"
-                android:resource="@xml/searchable" />
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
         </activity>
     </application>
 
