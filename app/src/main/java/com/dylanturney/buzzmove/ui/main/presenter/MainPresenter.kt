@@ -18,7 +18,7 @@ class MainPresenter<V : MainMVPView, I : MainMVPInteractor> @Inject internal con
                         it.getSearchQueryCall(query!!)
                                 .compose(schedulerProvider.ioToMainObservableScheduler())
                                 .subscribe {
-
+                                    var placesResponse = it
                                 }
                 )
 
