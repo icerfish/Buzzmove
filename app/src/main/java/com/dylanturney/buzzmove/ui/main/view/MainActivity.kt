@@ -2,6 +2,7 @@ package com.dylanturney.buzzmove.ui.main.view
 
 import android.app.SearchManager
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.widget.SearchView
@@ -10,8 +11,6 @@ import com.dylanturney.buzzmove.ui.base.view.BaseActivity
 import com.dylanturney.buzzmove.ui.main.interactor.MainMVPInteractor
 import com.dylanturney.buzzmove.ui.main.presenter.MainMVPPresenter
 import javax.inject.Inject
-
-
 
 
 class MainActivity : BaseActivity(), MainMVPView {
@@ -43,6 +42,14 @@ class MainActivity : BaseActivity(), MainMVPView {
                 searchManager.getSearchableInfo(componentName))
 
         return true
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        setIntent(intent)
+        if (Intent.ACTION_SEARCH == intent.action) {
+            val query = intent.getStringExtra(SearchManager.QUERY)
+            presenter.applySearch(query)
+        }
     }
 
 }

@@ -6,4 +6,6 @@ import com.dylanturney.buzzmove.ui.main.view.MainMVPView
 
 interface MainMVPPresenter<V : MainMVPView, I : MainMVPInteractor> : MVPPresenter<V, I> {
 
+    fun applySearch(query: String?)
+
 }

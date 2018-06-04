@@ -41,7 +41,19 @@ object NetworkModule {
     @Named("authInterceptor")
     internal fun provideAuthInterceptor(): Interceptor {
         return Interceptor {
-            it.proceed(it.request())
+            val original = it.request()
+            val originalHttpUrl = original.url()
+
+            val url = originalHttpUrl.newBuilder()
+                    .addQueryParameter("key", BuildConfig.GOOGLE_PLACES_API_KEY)
+                    .build()
+
+            // Request customization: add request headers
+            val requestBuilder = original.newBuilder()
+                    .url(url)
+
+            val request = requestBuilder.build()
+            it.proceed(request)
         }
     }
 
