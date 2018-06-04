@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import dagger.android.AndroidInjection
 
-open class BaseActivity : AppCompatActivity(), MVPView {
+open class BaseActivity : AppCompatActivity(), MVPView, BaseFragment.Callback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,4 +21,11 @@ open class BaseActivity : AppCompatActivity(), MVPView {
 
     private fun performDI() = AndroidInjection.inject(this)
 
+    override fun onFragmentAttached() {
+
+    }
+
+    override fun onFragmentDetached(tag: String) {
+
+    }
 }

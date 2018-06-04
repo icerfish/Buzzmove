@@ -4,7 +4,7 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 
-class Place {
+open class Place {
 
     @SerializedName("formatted_address")
     @Expose
