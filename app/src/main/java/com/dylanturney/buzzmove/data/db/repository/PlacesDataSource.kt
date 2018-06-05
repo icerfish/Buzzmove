@@ -27,11 +27,11 @@ open class PlacesDataSource : AndroidViewModel, PlacesRepository {
                 .subscribe()
     }
 
-    override fun clearTable() = this.placesDao!!.clearTable()
+    override fun clearTable() = this.placesDao.clearTable()
 
     private fun insertPlacesObservable(places: List<Place>) = Observable.create<List<Place>> {
         try {
-            this.placesDao!!.insertAll(places)
+            this.placesDao.insertAll(places)
             it.onNext(places)
         } finally {
             it.onComplete()

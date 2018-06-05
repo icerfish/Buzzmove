@@ -13,6 +13,12 @@ import com.dylanturney.buzzmove.data.db.repository.PlacesRepository
 import com.dylanturney.buzzmove.ui.base.view.BaseActivity
 import com.dylanturney.buzzmove.ui.main.interactor.MainMVPInteractor
 import com.dylanturney.buzzmove.ui.main.presenter.MainMVPPresenter
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLngBounds
+import com.google.android.gms.maps.model.MarkerOptions
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
@@ -20,7 +26,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 
-class MainActivity : BaseActivity(), MainMVPView, HasSupportFragmentInjector {
+class MainActivity : BaseActivity(), MainMVPView, HasSupportFragmentInjector, OnMapReadyCallback {
 
     @Inject
     internal lateinit var fragmentDispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
@@ -29,11 +35,18 @@ class MainActivity : BaseActivity(), MainMVPView, HasSupportFragmentInjector {
     @Inject
     internal lateinit var placesRepository: PlacesRepository
 
+    var mapFragment: SupportMapFragment? = null
+    var googleMap: GoogleMap? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         map.view?.visibility = View.GONE
+
+        mapFragment = supportFragmentManager
+                .findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment?.getMapAsync(this)
 
         presenter.onAttach(this)
     }
@@ -71,9 +84,24 @@ class MainActivity : BaseActivity(), MainMVPView, HasSupportFragmentInjector {
     fun switchLayouts(view: View) {
         val visible = map.view?.visibility == View.VISIBLE
 
-        map.view?.visibility = if (visible) View.GONE else View.VISIBLE
-        places_fragment.view?.visibility = if (visible) View.VISIBLE else View.GONE
+        map.view?.visibility = if (visible) View.INVISIBLE else View.VISIBLE
+        places_fragment.view?.visibility = if (visible) View.VISIBLE else View.INVISIBLE
         switch_layout.setImageResource(if (visible) R.drawable.ic_list else R.drawable.ic_map)
     }
 
+    override fun displayPlaces(places: List<MarkerOptions>?, latLngBounds: LatLngBounds) {
+        googleMap?.clear()
+        places?.forEach {
+            googleMap?.addMarker(it)
+        }
+
+        if (map.isVisible) {
+            googleMap?.moveCamera(
+                    CameraUpdateFactory.newLatLngBounds(latLngBounds, resources.getDimensionPixelSize(R.dimen.padding)))
+        }
+    }
+
+    override fun onMapReady(googleMap: GoogleMap?) {
+        this.googleMap = googleMap
+    }
 }
