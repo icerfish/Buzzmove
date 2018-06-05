@@ -13,6 +13,9 @@ interface PlacesDao {
     @Query("SELECT * FROM place_table")
     fun getAll(): LiveData<List<Place>>
 
+    @Query("SELECT * FROM place_table WHERE id = :id ")
+    fun getPlace(id: String): LiveData<Place>
+
     @Insert
     fun insertAll(users: List<Place>)
 

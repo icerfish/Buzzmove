@@ -9,10 +9,11 @@ import android.view.Menu
 import android.view.View
 import android.widget.SearchView
 import com.dylanturney.buzzmove.R
-import com.dylanturney.buzzmove.data.db.repository.PlacesRepository
 import com.dylanturney.buzzmove.ui.base.view.BaseActivity
+import com.dylanturney.buzzmove.ui.detail.view.DetailActivity
 import com.dylanturney.buzzmove.ui.main.interactor.MainMVPInteractor
 import com.dylanturney.buzzmove.ui.main.presenter.MainMVPPresenter
+import com.dylanturney.buzzmove.util.KeyUtil
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -33,8 +34,6 @@ class MainActivity : BaseActivity(), MainMVPView, HasSupportFragmentInjector, On
     internal lateinit var fragmentDispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
     @Inject
     internal lateinit var presenter: MainMVPPresenter<MainMVPView, MainMVPInteractor>
-    @Inject
-    internal lateinit var placesRepository: PlacesRepository
 
     var mapFragment: SupportMapFragment? = null
     var googleMap: GoogleMap? = null
@@ -114,7 +113,11 @@ class MainActivity : BaseActivity(), MainMVPView, HasSupportFragmentInjector, On
     }
 
     override fun onMarkerClick(marker: Marker?): Boolean {
-        val tag = marker?.tag
+        if (marker?.tag is String) {
+            val intent = Intent(this, DetailActivity::class.java)
+            intent.putExtra(KeyUtil.placeId, marker.tag!! as String)
+            startActivity(intent)
+        }
         return true
     }
 }

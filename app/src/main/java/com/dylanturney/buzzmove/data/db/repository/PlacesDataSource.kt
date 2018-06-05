@@ -21,6 +21,10 @@ open class PlacesDataSource : AndroidViewModel, PlacesRepository {
 
     override fun getAll(): LiveData<List<Place>> = allPlaces
 
+    override fun getPlace(id: String): LiveData<Place> {
+        return placesDao.getPlace(id)
+    }
+
     override fun insertAll(places: List<Place>) {
         insertPlacesObservable(places)
                 .observeOn(Schedulers.io())
