@@ -16,9 +16,9 @@ class PlacesAdapter(private val places: MutableList<Place>) : RecyclerView.Adapt
             ItemPlaceListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
     )
 
-    internal fun updatePlaces(blogs: List<Place>) {
+    internal fun updatePlaces(places: List<Place>) {
         this.places.clear()
-        this.places.addAll(blogs)
+        this.places.addAll(places)
         notifyDataSetChanged()
     }
 

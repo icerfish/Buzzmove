@@ -3,6 +3,7 @@ package com.dylanturney.buzzmove
 import android.app.Activity
 import android.app.Application
 import com.dylanturney.buzzmove.di.component.DaggerAppComponent
+import com.facebook.drawee.backends.pipeline.Fresco
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import javax.inject.Inject
@@ -20,5 +21,7 @@ class BaseApp: Application(), HasActivityInjector  {
                 .application(this)
                 .build()
                 .inject(this)
+
+        Fresco.initialize(this)
     }
 }
