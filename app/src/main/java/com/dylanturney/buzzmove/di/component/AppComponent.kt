@@ -5,6 +5,7 @@ import com.dylanturney.buzzmove.BaseApp
 import com.dylanturney.buzzmove.data.network.NetworkModule
 import com.dylanturney.buzzmove.di.builder.ActivityBuilder
 import com.dylanturney.buzzmove.di.module.AppModule
+import com.dylanturney.buzzmove.di.module.RoomModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
@@ -12,7 +13,7 @@ import javax.inject.Singleton
 
 
 @Singleton
-@Component(modules = [(AndroidInjectionModule::class), (AppModule::class), (NetworkModule::class), (ActivityBuilder::class)])
+@Component(modules = [(AndroidInjectionModule::class), (AppModule::class), (RoomModule::class), (NetworkModule::class), (ActivityBuilder::class)])
 interface AppComponent {
 
     @Component.Builder

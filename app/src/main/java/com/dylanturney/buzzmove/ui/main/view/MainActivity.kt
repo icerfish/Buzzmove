@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment
 import android.view.Menu
 import android.widget.SearchView
 import com.dylanturney.buzzmove.R
+import com.dylanturney.buzzmove.data.db.repository.PlacesRepository
 import com.dylanturney.buzzmove.ui.base.view.BaseActivity
 import com.dylanturney.buzzmove.ui.main.interactor.MainMVPInteractor
 import com.dylanturney.buzzmove.ui.main.presenter.MainMVPPresenter
@@ -23,6 +24,8 @@ class MainActivity : BaseActivity(), MainMVPView, HasSupportFragmentInjector {
     internal lateinit var fragmentDispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
     @Inject
     internal lateinit var presenter: MainMVPPresenter<MainMVPView, MainMVPInteractor>
+    @Inject
+    internal lateinit var placesRepository: PlacesRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
