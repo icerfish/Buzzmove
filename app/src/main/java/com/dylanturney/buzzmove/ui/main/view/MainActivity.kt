@@ -4,18 +4,23 @@ import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.view.Menu
 import android.widget.SearchView
 import com.dylanturney.buzzmove.R
 import com.dylanturney.buzzmove.ui.base.view.BaseActivity
 import com.dylanturney.buzzmove.ui.main.interactor.MainMVPInteractor
 import com.dylanturney.buzzmove.ui.main.presenter.MainMVPPresenter
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.support.HasSupportFragmentInjector
 import javax.inject.Inject
 
 
-class MainActivity : BaseActivity(), MainMVPView {
+class MainActivity : BaseActivity(), MainMVPView, HasSupportFragmentInjector {
 
-
+    @Inject
+    internal lateinit var fragmentDispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
     @Inject
     internal lateinit var presenter: MainMVPPresenter<MainMVPView, MainMVPInteractor>
 
@@ -50,6 +55,10 @@ class MainActivity : BaseActivity(), MainMVPView {
             val query = intent.getStringExtra(SearchManager.QUERY)
             presenter.applySearch(query)
         }
+    }
+
+    override fun supportFragmentInjector(): AndroidInjector<Fragment>? {
+        return fragmentDispatchingAndroidInjector
     }
 
 }

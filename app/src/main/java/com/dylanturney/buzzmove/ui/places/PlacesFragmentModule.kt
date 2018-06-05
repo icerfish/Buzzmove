@@ -1,12 +1,12 @@
 package com.mindorks.framework.mvp.ui.feed.blog
 
 import android.support.v7.widget.LinearLayoutManager
+import com.dylanturney.buzzmove.ui.places.view.PlacesFragment
 import com.mindorks.framework.mvp.ui.feed.blog.interactor.PlacesInteractor
 import com.mindorks.framework.mvp.ui.feed.blog.interactor.PlacesMVPInteractor
 import com.mindorks.framework.mvp.ui.feed.blog.presenter.PlacesMVPPresenter
 import com.mindorks.framework.mvp.ui.feed.blog.presenter.PlacesPresenter
 import com.mindorks.framework.mvp.ui.feed.blog.view.PlacesAdapter
-import com.mindorks.framework.mvp.ui.feed.blog.view.PlacesFragment
 import com.mindorks.framework.mvp.ui.feed.blog.view.PlacesMVPView
 import dagger.Module
 import dagger.Provides

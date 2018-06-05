@@ -1,4 +1,4 @@
-package com.mindorks.framework.mvp.ui.feed.blog.view
+package com.dylanturney.buzzmove.ui.places.view
 
 import android.os.Bundle
 import android.support.v7.widget.DefaultItemAnimator
@@ -11,6 +11,8 @@ import com.dylanturney.buzzmove.data.model.Place
 import com.dylanturney.buzzmove.ui.base.view.BaseFragment
 import com.mindorks.framework.mvp.ui.feed.blog.interactor.PlacesMVPInteractor
 import com.mindorks.framework.mvp.ui.feed.blog.presenter.PlacesMVPPresenter
+import com.mindorks.framework.mvp.ui.feed.blog.view.PlacesAdapter
+import com.mindorks.framework.mvp.ui.feed.blog.view.PlacesMVPView
 import kotlinx.android.synthetic.main.fragment_places.*
 import javax.inject.Inject
 

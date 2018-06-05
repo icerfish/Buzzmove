@@ -1,6 +1,6 @@
 package com.mindorks.framework.mvp.ui.feed.blog
 
-import com.mindorks.framework.mvp.ui.feed.blog.view.PlacesFragment
+import com.dylanturney.buzzmove.ui.places.view.PlacesFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

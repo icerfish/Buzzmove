@@ -13,6 +13,8 @@ abstract class BaseFragment : Fragment(), MVPView {
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
+        performDependencyInjection()
+
         if (context is BaseActivity) {
             val activity = context as BaseActivity?
             this.parentActivity = activity
@@ -22,7 +24,6 @@ abstract class BaseFragment : Fragment(), MVPView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        performDependencyInjection()
         setHasOptionsMenu(false)
     }
 
