@@ -22,6 +22,8 @@ android {
 
         buildConfigField "String", "BASE_URL", "\"https://maps.googleapis.com/maps/api/place/\""
         buildConfigField "String", "GOOGLE_PLACES_API_KEY", secretsProperties['GOOGLE_PLACES_API_KEY']
+        resValue "string", "google_maps_key", (secretsProperties['GOOGLE_MAPS_API_KEY'] ?: "")
+
     }
     buildTypes {
         release {
@@ -72,4 +74,8 @@ dependencies {
     // Lifecycle components
     implementation "android.arch.lifecycle:extensions:$rootProject.archLifecycleVersion"
     kapt "android.arch.lifecycle:compiler:$rootProject.archLifecycleVersion"
+
+    // Google Play Services
+    implementation "com.google.android.gms:play-services-location:15.0.1"
+    implementation "com.google.android.gms:play-services-maps:15.0.1"
 }
