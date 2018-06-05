@@ -8,7 +8,7 @@ interface PlacesRepository {
 
     fun getAll(): LiveData<List<Place>>
 
-    fun insertAll(users: List<Place>)
+    fun insertAll(places: List<Place>)
 
     fun clearTable()
 
