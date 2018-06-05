@@ -31,13 +31,13 @@ class MainPresenter<V : MainMVPView, I : MainMVPInteractor> @Inject internal con
         })
     }
 
-    fun createMarkersAndBounds(places: List<Place>): Pair<List<MarkerOptions>, LatLngBounds> {
+    fun createMarkersAndBounds(places: List<Place>): Pair<List<Pair<MarkerOptions, String>>, LatLngBounds> {
         val latLngBoundsBuilder = LatLngBounds.Builder()
         val markers = places.map {
             val location = it.geometry?.location
             val latLng = LatLng(location?.lat ?: 0.0, location?.lng ?: 0.0)
             latLngBoundsBuilder.include(latLng)
-            MarkerOptions().position(latLng)
+            Pair(MarkerOptions().position(latLng), it.id!!)
         }
 
         return Pair(markers, latLngBoundsBuilder.build())

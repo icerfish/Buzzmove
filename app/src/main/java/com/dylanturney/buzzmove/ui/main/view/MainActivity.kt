@@ -18,6 +18,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLngBounds
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -26,7 +27,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 
-class MainActivity : BaseActivity(), MainMVPView, HasSupportFragmentInjector, OnMapReadyCallback {
+class MainActivity : BaseActivity(), MainMVPView, HasSupportFragmentInjector, OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     @Inject
     internal lateinit var fragmentDispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
@@ -37,6 +38,8 @@ class MainActivity : BaseActivity(), MainMVPView, HasSupportFragmentInjector, On
 
     var mapFragment: SupportMapFragment? = null
     var googleMap: GoogleMap? = null
+
+    var markers: List<Marker> = arrayListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,19 +92,28 @@ class MainActivity : BaseActivity(), MainMVPView, HasSupportFragmentInjector, On
         switch_layout.setImageResource(if (visible) R.drawable.ic_list else R.drawable.ic_map)
     }
 
-    override fun displayPlaces(places: List<MarkerOptions>?, latLngBounds: LatLngBounds) {
-        googleMap?.clear()
-        places?.forEach {
-            googleMap?.addMarker(it)
+    override fun displayPlaces(places: List<Pair<MarkerOptions, String>>?, latLngBounds: LatLngBounds) {
+        markers.forEach {
+            it.remove()
         }
+        markers = places?.mapNotNull {
+            val marker = googleMap?.addMarker(it.first)
+            marker?.tag = it.second
+            marker
+        } ?: arrayListOf()
 
         if (map.isVisible) {
-            googleMap?.moveCamera(
+            googleMap?.animateCamera(
                     CameraUpdateFactory.newLatLngBounds(latLngBounds, resources.getDimensionPixelSize(R.dimen.padding)))
         }
     }
 
     override fun onMapReady(googleMap: GoogleMap?) {
         this.googleMap = googleMap
+        googleMap?.setOnMarkerClickListener(this)
+    }
+
+    override fun onMarkerClick(marker: Marker?): Boolean {
+
     }
 }

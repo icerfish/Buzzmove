@@ -44,14 +44,21 @@
                     style="@style/Text.Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="@{place.name, default=`@string/place_name`}" />
+                    android:text="@{place.name, default=`@string/place_name`}" />
 
                 <TextView
                     android:id="@+id/address"
                     style="@style/Text.Body"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="@{place.formattedAddress, default=`@string/place_address`}" />
+                    android:text="@{place.formattedAddress, default=`@string/place_address`}" />
+
+                <TextView
+                    android:id="@+id/place_type"
+                    style="@style/Text.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{place.placeTypesAsString, default=`@string/place_types`}" />
             </LinearLayout>
         </LinearLayout>
 

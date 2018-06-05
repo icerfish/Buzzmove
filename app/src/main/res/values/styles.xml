@@ -20,4 +20,8 @@
 
     </style>
 
+    <style name="Text.Small" parent="TextAppearance.AppCompat.Small">
+
+    </style>
+
 </resources>

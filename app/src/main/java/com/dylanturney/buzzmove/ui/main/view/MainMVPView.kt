@@ -6,6 +6,6 @@ import com.google.android.gms.maps.model.MarkerOptions
 
 interface MainMVPView : MVPView {
 
-    fun displayPlaces(places: List<MarkerOptions>?, latLngBounds: LatLngBounds) : Unit?
+    fun displayPlaces(places: List<Pair<MarkerOptions, String>>?, latLngBounds: LatLngBounds): Unit?
 
 }

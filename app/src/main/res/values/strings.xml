@@ -4,5 +4,6 @@
     <string name="search_hint">Venue, Address, Bar…</string>
     <string name="place_name">Place name</string>
     <string name="place_address">Place address</string>
+    <string name="place_types">Place types</string>
 
 </resources>

@@ -41,4 +41,15 @@ open class Place {
     @Expose
     var types: List<String>? = null
 
+    fun getPlaceTypesAsString(): String? {
+        val sb = StringBuilder()
+        types?.forEachIndexed { index, s ->
+            sb.append(s.replace("_", " ").capitalize())
+            if (index != types!!.size - 1) {
+                sb.append(", ")
+            }
+        }
+        return sb.toString()
+    }
+
 }
