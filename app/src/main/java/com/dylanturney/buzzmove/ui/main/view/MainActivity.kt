@@ -114,6 +114,7 @@ class MainActivity : BaseActivity(), MainMVPView, HasSupportFragmentInjector, On
     }
 
     override fun onMarkerClick(marker: Marker?): Boolean {
-
+        val tag = marker?.tag
+        return true
     }
 }
