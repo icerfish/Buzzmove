@@ -44,6 +44,7 @@
 
         <activity
             android:name="com.dylanturney.buzzmove.ui.detail.view.DetailActivity"
+            android:parentActivityName=".ui.detail.view.DetailActivity"
             android:screenOrientation="portrait" />
     </application>
 

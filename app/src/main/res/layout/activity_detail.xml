@@ -14,5 +14,9 @@
         android:orientation="vertical"
         tools:context=".ui.detail.view.DetailActivity">
 
+        <include
+            android:id="@+id/item"
+            layout="@layout/item_place_list" />
+
     </FrameLayout>
 </layout>
