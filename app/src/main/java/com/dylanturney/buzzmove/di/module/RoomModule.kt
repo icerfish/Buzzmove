@@ -28,7 +28,7 @@ class RoomModule {
 
     @Singleton
     @Provides
-    fun productRepository(application: Application, productDao: PlacesDao): PlacesRepository {
-        return PlacesDataSource(application, productDao)
+    fun placeRepository(application: Application, placesDao: PlacesDao): PlacesRepository {
+        return PlacesDataSource(application, placesDao)
     }
 }

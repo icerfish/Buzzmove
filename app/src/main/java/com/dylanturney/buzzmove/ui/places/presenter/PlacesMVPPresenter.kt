@@ -7,4 +7,5 @@ import com.mindorks.framework.mvp.ui.feed.blog.view.PlacesMVPView
 interface PlacesMVPPresenter<V : PlacesMVPView, I : PlacesMVPInteractor> : MVPPresenter<V, I> {
 
     fun onViewPrepared()
+
 }

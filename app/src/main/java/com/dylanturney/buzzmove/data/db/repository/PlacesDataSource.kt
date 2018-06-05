@@ -9,14 +9,14 @@ import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 
 
-class PlacesDataSource : AndroidViewModel, PlacesRepository {
+open class PlacesDataSource : AndroidViewModel, PlacesRepository {
 
-    private val placeDao: PlacesDao
-    private val allPlaces: LiveData<List<Place>>
+    var placesDao: PlacesDao
+    var allPlaces: LiveData<List<Place>>
 
-    constructor(application: Application, placeDao: PlacesDao) : super(application) {
-        this.placeDao = placeDao
-        this.allPlaces = placeDao.getAll()
+    constructor(application: Application, placesDao: PlacesDao) : super(application) {
+        this.placesDao = placesDao
+        this.allPlaces= placesDao.getAll()
     }
 
     override fun getAll(): LiveData<List<Place>> = allPlaces
@@ -27,11 +27,11 @@ class PlacesDataSource : AndroidViewModel, PlacesRepository {
                 .subscribe()
     }
 
-    override fun clearTable() = this.placeDao.clearTable()
+    override fun clearTable() = this.placesDao!!.clearTable()
 
     private fun insertPlacesObservable(places: List<Place>) = Observable.create<List<Place>> {
         try {
-            this.placeDao.insertAll(places)
+            this.placesDao!!.insertAll(places)
             it.onNext(places)
         } finally {
             it.onComplete()
