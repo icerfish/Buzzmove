@@ -3,11 +3,16 @@ package com.dylanturney.buzzmove.data.db.repository
 import android.arch.lifecycle.LiveData
 import com.dylanturney.buzzmove.data.db.dao.PlacesDao
 import com.dylanturney.buzzmove.data.model.Place
+import com.dylanturney.buzzmove.util.SchedulerProvider
+import io.reactivex.Observable
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 
+class PlacesDataSource : PlacesRepository {
 
-class PlacesDataSource: PlacesRepository {
+    @Inject
+    lateinit var schedulerProvider: SchedulerProvider
 
     private val placeDao: PlacesDao
 
@@ -21,10 +26,21 @@ class PlacesDataSource: PlacesRepository {
     }
 
     override fun insertAll(places: List<Place>) {
-        this.placeDao.insertAll(places)
+        insertPlacesObservable(places)
+                .observeOn(Schedulers.io())
+                .subscribe()
     }
 
     override fun clearTable() {
         this.placeDao.clearTable()
+    }
+
+    private fun insertPlacesObservable(places: List<Place>) = Observable.create<List<Place>> {
+        try {
+            this.placeDao.insertAll(places)
+            it.onNext(places)
+        } finally {
+            it.onComplete()
+        }
     }
 }

@@ -8,9 +8,9 @@ open class Response<T> {
 
     @SerializedName("results")
     @Expose
-    private val results: List<T>? = null
+    var results: List<T>? = null
     @SerializedName("status")
     @Expose
-    private val status: String? = null
+    var status: String? = null
 
 }
