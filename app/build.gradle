@@ -76,6 +76,7 @@ dependencies {
     kapt "android.arch.lifecycle:compiler:$rootProject.archLifecycleVersion"
 
     // Google Play Services
+    implementation "com.google.android.gms:play-services-base:15.0.1"
     implementation "com.google.android.gms:play-services-location:15.0.1"
     implementation "com.google.android.gms:play-services-maps:15.0.1"
 
